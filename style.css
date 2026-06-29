@@ -1,0 +1,71 @@
+
+@import url("https://fonts.googleapis.com/css2?family=geist:wght@100..900&display=swap");
+
+
+.font-text{
+  font-family: "Geist", serif;
+  font-style: normal;
+  font-optical-sizing: auto;
+}
+
+/* Active Tab */
+.tab-btn.active{
+  background:#facc15 !important;
+  color:black !important;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 10px;
+}
+
+/* Main Container */
+.custom-container{
+  max-width: 1366px;
+  width: 100%;
+  margin-inline: auto;
+  padding: 0 12px;
+}
+
+/* Tabs */
+.tab-btn{
+  cursor: pointer;
+  padding: 4px 16px;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid var(--color-base-300, white);
+  color: var(--color-neutral, #374151);
+  transition: all 0.1s ease;
+}
+
+.tab-btn:hover{
+  background-color: var(--color-base-300, white);
+}
+
+/* Non-Active Tab */
+.tab-btn{
+  background-color: blue;
+  border-color:  blue;
+  color: white;
+}
+
+/* Fade Animation Class */
+.fade{
+  opacity: 0;
+  animation: fadeAnimation 0.3s linear forwards;
+}
+
+/* Animation Keyframes */
+@keyframes fadeAnimation{
+  0%{
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
