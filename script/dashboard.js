@@ -3,11 +3,20 @@ const SEARCH_URL = "https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q
 
 let allIssues = [];
 
+function updateIssueCounts(issues) {
+  const totalCount = document.getElementById("total-count");
+  const openCount = document.getElementById("open-count");
+  const closedCount = document.getElementById("closed-count");
 
-function updateCountBar(issues) {
-  document.getElementById("total-count").textContent = issues.length;
-  document.getElementById("open-count").textContent = issues.filter(i => i.status?.toLowerCase() === "open").length;
-  document.getElementById("closed-count").textContent = issues.filter(i => i.status?.toLowerCase() === "closed").length;
+  if (!totalCount || !openCount || !closedCount) return;
+
+  const currentIssues = Array.isArray(issues) ? issues : [];
+  const openIssues = currentIssues.filter(issue => issue.status?.toLowerCase() === "open");
+  const closedIssues = currentIssues.filter(issue => issue.status?.toLowerCase() === "closed");
+
+  totalCount.textContent = currentIssues.length;
+  openCount.textContent = openIssues.length;
+  closedCount.textContent = closedIssues.length;
 }
 
 //FETCH ISSUES
@@ -35,7 +44,6 @@ async function loadIssues() {
   } catch (e) {
     console.error("Failed to load issues:", e);
     container.innerHTML = `<div class="col-span-full text-center py-20 text-red-500 font-bold">Failed to load issues</div>`;
-    updateCountBar(issues);
   }
 }
 
@@ -127,6 +135,7 @@ function renderIssues(issues) {
 
   if (!container) return;
 
+  updateIssueCounts(issues);
   container.innerHTML = "";
 
   issues.forEach(issue => {
